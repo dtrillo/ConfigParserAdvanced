@@ -3,7 +3,7 @@ developer by David Trillo Montero
 write me at manejandodatos@gmail.com
 
 Visit my website: http://www.manejandodatos.es """
-# Versión 0.6.0 - 20131202
+# Versión 0.7.0 - 20140110
 
 import ConfigParser
 
@@ -113,20 +113,15 @@ class ConfigParserAdvanced():
         sf = open(self.file,"w") # Necesito el fichero INI "preparado" para grabar información
         self.config.write(sf)
         sf.close()
-    def set(self, section, option, value = None):
+    def set(self, section, option, value = None, bSave = True):
+        if self.config.has_section(section) == False:
+            self.config.add_section(section)
         self.main_section = section
         self.config.set(self.main_section, option, value)
-        self.writedata()
+        if bSave:
+            self.writedata()
 
     # Write OPTION-VALUE to MAIN_SECTION
-    def set2(self, option, value = None):
+    def set2(self, option, value = None, bSave = True):
         """ Set data on the MAIN_SECTION  """
-        self.config.set(self.main_section, option, value)
-        self.writedata()
-
-#    def optionxform(self, optionstr):
-#        return self.config.optionxform(optionstr)
-#    def readfp(self, fp):
-#        return self.config.readfp(fp)
-#    def items(self, section):
-#        return self.config.items(self.main_section)
+        self.set(self.main_section, option, value, bSave)
