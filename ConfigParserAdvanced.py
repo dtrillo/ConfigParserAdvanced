@@ -89,7 +89,7 @@ class ConfigParserAdvanced():
         return self.options(self.main_section)
     def get2(self, option):
         """ Get a VALUE of an option, of the MAIN_SECTION"""
-        return self.get(self, self.main_section, option)
+        return self.get(self.main_section, option)
     def getboolean2(self, option):
         """ GET a BOOLEAN Value of an OPTION of the SECTION """
         return self.getboolean(self.main_section, option)
